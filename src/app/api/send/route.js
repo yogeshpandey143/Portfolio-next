@@ -1,12 +1,22 @@
+import "dotenv/config";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const apiKey = process.env.RESEND_API_KEY;
 const fromEmail = process.env.FROM_EMAIL;
 
-export async function POST(req, res) {
+console.log("Resend API Key:", apiKey ? "LOADED ✅" : "MISSING ❌");
+console.log("From Email:", fromEmail ? "LOADED ✅" : "MISSING ❌");
+
+if (!apiKey) {
+  throw new Error("❌ RESEND_API_KEY is missing!");
+}
+
+const resend = new Resend(apiKey);
+
+export async function POST(req) {
   const { email, subject, message } = await req.json();
-  console.log(email, subject, message);
+
   try {
     const data = await resend.emails.send({
       from: fromEmail,
@@ -23,6 +33,7 @@ export async function POST(req, res) {
     });
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error("Email sending error:", error);
+    return NextResponse.json({ error: error.message });
   }
 }
