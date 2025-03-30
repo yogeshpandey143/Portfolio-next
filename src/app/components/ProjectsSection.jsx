@@ -46,11 +46,12 @@ const projectsData = [
   },
   {
     id: 5,
-    title: "React Firebase Template",
-    description: "Authentication and CRUD operations",
-    image: "/images/projects/5.png",
+    title: "SnapTalk Social Media",
+    description:
+      "SnapTalk is an innovative social media platform designed to connect people and foster engaging online communities. The platform combines the power of modern web technologies to provide users with a seamless and secure social networking experience. Built using Spring Boot for the backend and React.js",
+    image: "/images/projects/5.jpg",
     tag: ["All", "Web"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/yogeshpandey143/snaptalk-spring-reactjs",
     previewUrl: "/",
   },
 ];
